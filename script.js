@@ -10,21 +10,30 @@ async function logVoucherToSupabase(voucher) {
         const response = await fetch(`${SUPABASE_URL}/rest/v1/vouchers`, {
             method: 'POST',
             headers: {
+                'Content-Type': 'application/json',
                 'apikey': SUPABASE_API_KEY,
                 'Authorization': `Bearer ${SUPABASE_API_KEY}`,
-                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 voucher: voucher,
-                timestamp: new Date().toISOString(),
+                timestamp: new Date().toISOString(), // Optional: Supabase defaults to `now()`
             }),
         });
+
+        // Check if the response is ok
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Error ${response.status}: ${response.statusText} - ${errorText}`);
+        }
+
+        // Parse the response as JSON (if applicable)
         const data = await response.json();
         console.log('Logged to Supabase:', data);
     } catch (error) {
         console.error('Error logging to Supabase:', error);
     }
 }
+
 
 
 
