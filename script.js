@@ -35,8 +35,16 @@ function showPopup(voucher) {
         body: JSON.stringify({ voucher }),
     })
         .then(response => response.json())
-        .then(data => console.log('Logged to Google Sheets:', data))
-        .catch(error => console.error('Error logging to Google Sheets:', error));
+        .then(data => {
+            console.log('Logged to Google Sheets:', data);
+            if (data.status !== 'success') {
+                alert('Failed to log voucher. Please try again.');
+            }
+        })
+        .catch(error => {
+            console.error('Error logging to Google Sheets:', error);
+            alert('An error occurred. Please try again later.');
+        });
 }
 
 
