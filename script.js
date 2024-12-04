@@ -29,7 +29,7 @@ function showPopup(voucher) {
     popup.classList.remove('hidden');
 
     // Send the click data to Google Sheets
-    fetch('https://script.google.com/macros/s/AKfycbyinrOXmn78y_eiX8QLXtbYYdYdlP_OyAQ3Kqx8yLEfcIa9fo0nKluEXgdnZlPGYcQq7Q/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbzxp5zd0Rqni7_9_Mzk1eQqd_CEMGVKS3p_32kecmILnqU6ux5OFt_EBZgsKPvcGwo4ng/exec', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ voucher }),
