@@ -20,19 +20,22 @@ async function logVoucherToSupabase(voucher) {
             }),
         });
 
-        // Check if the response is ok
+        // Check if the response is successful
         if (!response.ok) {
-            const errorText = await response.text();
+            const errorText = await response.text(); // Log error details
             throw new Error(`Error ${response.status}: ${response.statusText} - ${errorText}`);
         }
 
-        // Parse the response as JSON (if applicable)
-        const data = await response.json();
-        console.log('Logged to Supabase:', data);
+        // Only parse JSON if response has a body
+        const text = await response.text();
+        const data = text ? JSON.parse(text) : null;
+
+        console.log('Logged to Supabase:', data || 'No content in response');
     } catch (error) {
         console.error('Error logging to Supabase:', error);
     }
 }
+
 
 
 
