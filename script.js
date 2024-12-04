@@ -2,20 +2,30 @@ let currentIndex = 0;
 
 
 
-const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSe5IaeFvp-dyAYEVLEqzhpkdX5XkL7y0lAdQbADmIej1lrIUQ/viewform?usp=pp_url&entry.1652906474=Voucher+Name:+Test&entry.1770646240=Timestamp:+2024-12-04T12:34:56Z';
+const SUPABASE_URL = 'https://fesabtarxdmbbgrxplrn.supabase.co'; // Replace with your Supabase URL
+const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZlc2FidGFyeGRtYmJncnhwbHJuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzMzMzAxODEsImV4cCI6MjA0ODkwNjE4MX0.jZKIyrUEteDJOZzr8n_wBm5583qTgKMeqfBcJIUQxgg'; // Replace with your Supabase API Key
 
-function logVoucherToGoogleForms(voucher) {
-    const formData = new URLSearchParams();
-    formData.append('entry.1652906474', voucher); // Replace with the field ID for Voucher
-    formData.append('entry.1770646240', new Date().toISOString()); // Replace with the field ID for Timestamp
-
-    fetch(GOOGLE_FORM_URL, {
-        method: 'POST',
-        body: formData
-    })
-        .then(() => console.log('Logged to Google Forms'))
-        .catch(error => console.error('Error logging to Google Forms:', error));
+async function logVoucherToSupabase(voucher) {
+    try {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/vouchers`, {
+            method: 'POST',
+            headers: {
+                'apikey': SUPABASE_API_KEY,
+                'Authorization': `Bearer ${SUPABASE_API_KEY}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                voucher: voucher,
+                timestamp: new Date().toISOString(),
+            }),
+        });
+        const data = await response.json();
+        console.log('Logged to Supabase:', data);
+    } catch (error) {
+        console.error('Error logging to Supabase:', error);
+    }
 }
+
 
 
 function showPopup(voucher) {
@@ -23,9 +33,10 @@ function showPopup(voucher) {
     popup.querySelector('.popup-content p:first-child').textContent = `🎉 Congratulations! You chose "${voucher}"!`;
     popup.classList.remove('hidden');
 
-    // Log voucher to Google Forms
-    logVoucherToGoogleForms(voucher);
+    // Log voucher to Supabase
+    logVoucherToSupabase(voucher);
 }
+
 
 
 function updateCarousel() {
