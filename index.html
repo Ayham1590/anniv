@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Anniversary</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#memories">Some of Our Memories</a></li>
+            <li><a href="#vouchers">Vouchers</a></li>
+            <li><a href="#for-you">For You</a></li>
+        </ul>
+    </nav>
+
+    <header class="landing">
+        <div class="landing-content">
+            <h2>Happy One Year Anniversary, My Love!</h2>
+        </div>
+    </header>
+
+    <section id="memories" class="carousel-section">
+        <h2>Our Memories</h2>
+        <div class="carousel">
+            <button class="carousel-btn prev" onclick="prevSlide()">&#10094;</button>
+            <div class="carousel-slides">
+                <img src="1-modified.jpg" alt="Photo 1" data-description="Just you looking cute wearing my jacket.">
+                <img src="2-modified.jpg" alt="Photo 2"
+                    data-description="One of my fav pics of you(taken at the dentist)">
+                <img src="3-modified.jpg" alt="Photo 3"
+                    data-description="My sister took this cute pic of us (you were complaining about my sense of style)">
+                <img src="4-modified.jpg" alt="Photo 4" data-description="I love this pic of you so much">
+                <img src="5-modified.jpg" alt="Photo 5"
+                    data-description="our first time going to a cat cafe together and i love how cats always go to you cuz of your aura">
+                <img src="6-modified.jpg" alt="Photo 6"
+                    data-description="The lil monkey you are just climping around everywhere">
+                <img src="7-modified.jpg" alt="Photo 7"
+                    data-description="Our matching jacketss, this was during our first stages of dating">
+                <img src="8-modified.jpg" alt="Photo 8" data-description="You and gigi looking soooooo cute teeheee">
+            </div>
+            <button class="carousel-btn next" onclick="nextSlide()">&#10095;</button>
+        </div>
+    </section>
+
+    <div id="image-popup" class="popup hidden">
+        <div class="popup-content">
+            <img id="popup-img" src="" alt="Selected Memory">
+            <p id="popup-description"></p>
+            <button class="close-btn" onclick="closeImagePopup()">Close</button>
+        </div>
+    </div>
+
+    <section id="vouchers" class="vouchers">
+        <h2>Voucher Gifts</h2>
+        <div class="voucher-grid">
+            <div class="voucher" onclick="showPopup('Dinner Date')">🍽 Dinner Date</div>
+            <div class="voucher" onclick="showPopup('Shein Clothes')">👗 Shein Clothes</div>
+            <div class="voucher" onclick="showPopup('Konvy')">🛍 Konvy</div>
+        </div>
+    </section>
+
+    <div id="popup" class="popup hidden">
+        <div class="popup-content">
+            <p>🎉 Congratulations! You chose this!</p>
+            <p>Ayham will be notified.</p>
+            <p class="love-message">(He loves you so much ❤️)</p>
+            <button class="close-btn" onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <footer id="for-you">
+        <h2>For You</h2>
+        <p>To my dearest love, thank you for an amazing year filled with joy, laughter, and endless love. Here's to many
+            more years together. 💖</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
