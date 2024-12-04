@@ -1,5 +1,7 @@
 let currentIndex = 0;
 
+
+
 function updateCarousel() {
     const slides = document.querySelector('.carousel-slides');
     const slideWidth = slides.children[0].offsetWidth; // Get width of one slide
@@ -21,12 +23,22 @@ function prevSlide() {
 }
 
 
-
 function showPopup(voucher) {
     const popup = document.getElementById('popup');
     popup.querySelector('.popup-content p:first-child').textContent = `🎉 Congratulations! You chose "${voucher}"!`;
     popup.classList.remove('hidden');
+
+    // Send the click data to Google Sheets
+    fetch('https://script.google.com/macros/s/AKfycbw9BzQv8n3F9T_n3ALOHTk0U_C0DNHsFrUN-HORXAz26O1QxiYlyOlhTIYZn0gIuq2xpw/exec', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ voucher }),
+    })
+        .then(response => response.json())
+        .then(data => console.log('Logged to Google Sheets:', data))
+        .catch(error => console.error('Error logging to Google Sheets:', error));
 }
+
 
 function closePopup() {
     document.getElementById('popup').classList.add('hidden');
@@ -68,22 +80,6 @@ function createButterflies() {
             butterfly.remove();
         });
     }
-}
-
-function showPopup(voucher) {
-    const popup = document.getElementById('popup');
-    popup.querySelector('.popup-content p:first-child').textContent = `🎉 Congratulations! You chose "${voucher}"!`;
-    popup.classList.remove('hidden');
-
-    // Send the click data to Google Sheets
-    fetch('https://script.google.com/macros/s/AKfycbw9BzQv8n3F9T_n3ALOHTk0U_C0DNHsFrUN-HORXAz26O1QxiYlyOlhTIYZn0gIuq2xpw/exec', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ voucher }),
-    })
-        .then(response => response.json())
-        .then(data => console.log('Logged to Google Sheets:', data))
-        .catch(error => console.error('Error logging to Google Sheets:', error));
 }
 
 
